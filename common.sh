@@ -42,3 +42,18 @@ function prepare_path()
     fi
     print_color "SYSTEM" "目录[${1}]已准备好."
 }
+
+function funcs_handler()
+{
+    funcs=${1}
+
+    for func in ${funcs[@]}
+    do
+        ${i}
+        if [ $? != 0 ];
+        then
+            print_color "ERROR" "${func} failed, exit."
+            return 1
+        fi
+    done
+}
