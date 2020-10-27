@@ -17,6 +17,7 @@ function install_go_self()
     rm -f ${download_url##*/}
 
     ln -s ${work_path}"/go/bin/go" ${work_path}"/../bin/go"
+    ln -s ${work_path}"/go/bin/gofmt" ${work_path}"/../bin/gofmt"
 }
 
 function install_go()
