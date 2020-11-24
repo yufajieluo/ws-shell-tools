@@ -108,8 +108,11 @@ sed -i "s/append initrd=initrd.img inst.stage2=hd:LABEL=CentOS\\\x207\\\x20x86_6
 sed -i "s/linuxefi \/images\/pxeboot\/vmlinuz inst.stage2=hd:LABEL=CentOS\\\x207\\\x20x86_64 quiet/linuxefi \/images\/pxeboot\/vmlinuz inst.stage2=hd:LABEL=${iso_label} inst.ks=hd:LABEL=${iso_label}:\/isolinux\/ks.cfg/g" ${iso_path}"/EFI/BOOT/grub.cfg"
 
 # 生成ISO镜像文件
-# iso_name 为镜像文件名称
-mkisofs -o ${iso_name} -input-charset utf-8 -b ${iso_path}"isolinux/isolinux.bin" -c ${iso_path}"isolinux/boot.cat" -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -v -T -joliet-long -V ${iso_label} ${iso_path}
+# - iso_name 为镜像文件名称
+# - -b 和 -c 的值不能使用绝对路径
+cd ${iso_path}
+mkisofs -o ${iso_name} -input-charset utf-8 -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -v -T -joliet-long -V ${iso_label} ${iso_path}
+cd -
 
 # 计算md5
 mv ${iso_path}"/iso_name" ~
