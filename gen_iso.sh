@@ -33,7 +33,7 @@ cp -f /media/.treeinfo ${iso_path}
 cp -f ${installed_packages}"/*" ${iso_path}"/Packages"
 
 # 重新生成依赖
-files=`find /root/wsiso/repodata -name *-comps.xml`
+files=`find /root/wsiso/repodata -name "*-comps.xml"`
 for file in ${files[@]}
 do
     createrepo -g ${file} ${iso_path}
